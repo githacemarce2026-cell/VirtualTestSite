@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IDPS Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            background-color: navy;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logout-btn {
+            background-color: crimson;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .logout-btn:hover {
+            background-color: red;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid darkgray;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid lightgray;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: steelblue;
+            color: white;
+        }
+        .alert {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Intrusion Detection & Prevention System</h1>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+
+    <div class="card">
+        <h3>System Status</h3>
+        <p><strong>Currently Blocked IPs:</strong> {{ blocked_count }}</p>
+        <p><em>Tip: Refreshing this page more than 5 times in 10 seconds will trigger the prevention system and block your IP!</em></p>
+    </div>
+
+    <div class="card">
+        <h3>Security Audit Logs</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>IP Address</th>
+                    <th>Detected Action</th>
+                    <th>System Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.time }}</td>
+                    <td>{{ log.ip }}</td>
+                    <td>{{ log.action }}</td>
+                    <td class="{% if log.status == 'IP Blocked' or log.status == 'Alert' %}alert{% else %}success{% endif %}">
+                        {{ log.status }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
