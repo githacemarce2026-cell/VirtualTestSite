@@ -1,10 +1,4 @@
-######    ######       #      ##            ##     ##   ######
-#    #    #           # #     #  #          # #   # #   #
-######    ###        #####    #   #         #   #   #   ###
-#  #      #         #     #   #    #        #       #   #
-#   #     #         #     #   #  #          #       #   #
-#    #    ######    #     #   ##            #       #   ######
-
+READ ME!
 This is simple web IDPS application built with Python and HTML/CSS that automatically detects and blocks suspicious network traffic, such as rapid page requests (DDoS attempt) and repeated bad login attempts (Brute Force Attack).
 
 1) How Request Tracking and Rate limiting works? idps_firewall
