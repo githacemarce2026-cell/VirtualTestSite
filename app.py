@@ -94,7 +94,6 @@ def dashboard():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
     
-    # Count blocked IPs
     active_blocked_count = len(blocked_ips)
     return render_template('dashboard.html', logs=reversed(security_logs), blocked_count=active_blocked_count)
 
