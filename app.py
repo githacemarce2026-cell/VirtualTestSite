@@ -47,7 +47,6 @@ def idps_firewall():
     request_history[ip] = [t for t in request_history[ip] if current_time - t < TIME_WINDOW]
     request_history[ip].append(current_time)
 
-    # detect flood attack
     if len(request_history[ip]) > MAX_REQUESTS:
         blocked_ips[ip] = current_time + BLOCK_TIME
         log_event(ip, "Rate Limit Exceeded (DDoS Attack Attempt)", "IP Blocked")
@@ -67,17 +66,15 @@ def login():
         ip = request.remote_addr
         current_time = time.time()
 
-        if username == 'admin' and password == 'admin123':
+        if username == 'admin' and password == '@dmin273':
             failed_login_attempts[ip] = []
             session['logged_in'] = True
             log_event(ip, "User Login", "Success")
             return redirect(url_for('dashboard'))
         else:
-            # detection for brute force attacks
             if ip not in failed_login_attempts:
                 failed_login_attempts[ip] = []
             
-            # timestamps for brute force
             failed_login_attempts[ip] = [t for t in failed_login_attempts[ip] if current_time - t < FAILED_LOGIN_WINDOW]
             failed_login_attempts[ip].append(current_time)
 
