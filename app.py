@@ -20,7 +20,7 @@ security_logs = []
 
 def log_event(ip_address, action, status):
     """Helper function to record security logs."""
-    timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
+    timestamp = time.strftime('%d-%m-%Y %H:%M:%S')
     security_logs.append({
         'time': timestamp,
         'ip': ip_address,
